@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: 打包发布
 
 on:
   push:
@@ -10,38 +10,42 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  release:
+    name: 打包并生成Release文件
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         node-version: [15.14.0]
-        os:
-          - macos-11.0
-          - ubuntu-18.04
-          - windows-latest
+        os: [macos-11.0, ubuntu-18.04, windows-latest]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: 使用 Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Windows 打包
-      if: matrix.os == 'windows-latest'
-      run: npm run pack
-      env:
-        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    - name: Mac 打包
-      if: matrix.os == 'macos-11.0'
-      run: npm run pack
-      env:
-        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    - name: Archive Build Artifacts
-      uses: LabhanshAgrawal/upload-artifact@v3
-      with:
-        path: |
-          dist/*.dmg
-          dist/*.exe
+      - name: 拉取代码
+      - uses: actions/checkout@v2
+
+      - name: 使用 Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: Windows 打包
+        if: matrix.os == 'windows-latest'
+        run: npm run pack
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Mac 打包
+        if: matrix.os == 'macos-11.0'
+        run: npm run pack
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Archive Build Artifacts
+        uses: LabhanshAgrawal/upload-artifact@v3
+        with:
+          path: |
+            dist/*.dmg
+            dist/*.exe
