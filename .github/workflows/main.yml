@@ -41,14 +41,14 @@ jobs:
       - name: build windows app
         if: matrix.os == 'windows-2019'
         run: |
-          npm run build
+          npm run pack
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
  
       - name: build mac app
         if: matrix.os == 'macos-10.15'
         run: |
-          npm run build
+          npm run pack
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
  
