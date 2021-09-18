@@ -29,17 +29,20 @@ jobs:
           cache: 'npm'
 
       - name: 安装依赖
-        run: npm install
+        run: |
+          npm install
 
       - name: Windows 打包
         if: matrix.os == 'windows-latest'
-        run: npm run pack
+        run: |
+          npm run pack
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Mac 打包
         if: matrix.os == 'macos-11.0'
-        run: npm run pack
+        run: |
+          npm run pack
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
