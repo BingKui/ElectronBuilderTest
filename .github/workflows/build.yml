@@ -52,28 +52,24 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
  
-      # step5: cleanup artifacts in build
-      # - name: 清理 windows 打包文件
-      #   if: matrix.os == 'windows-2019'
-      #   run: |
-      #     npx rimraf "dist/!(*.exe)"
-      # - name: 清理 macos 打包问津
-      #   if: matrix.os == 'macos-10.15'
-      #   run: |
-      #     npx rimraf "dist/!(*.dmg)"
-      # step6: upload artifacts
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}
           path: dist
       
+      # - name: 发布 Release
+      #   uses: actions-cool/release-helper@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     triger: 'tag'
+      #     branch: 'master'
       - name: 发布 Release
-        uses: actions-cool/release-helper@v1
+        uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          triger: 'tag'
-          branch: 'master'
+          files: "dist/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       # step7: create release
       # - name: Action Release 发布
       #   # You may pin to the exact commit or the version.
