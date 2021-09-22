@@ -52,7 +52,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
  
-      - name: upload artifacts
+      - name: 上传构建产物
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}
