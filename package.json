@@ -30,12 +30,15 @@
 		"directories": {
 			"output": "dist"
 		},
+		"publish": [{
+			"provider": "generic",
+			"url": "http://ihost.uiseed.cn/zip/"
+		}],
 		"files": [
 			"dist/electron/**/*"
 		],
 		"dmg": {
-			"contents": [
-				{
+			"contents": [{
 					"x": 410,
 					"y": 150,
 					"type": "link",
