@@ -66,7 +66,7 @@ jobs:
       #     branch: 'master'
       - name: 发布 Release
         uses: softprops/action-gh-release@v1
-        # if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: "dist/**"
         env:
