@@ -54,6 +54,7 @@ jobs:
             dist/*.deb
             dist/*.rpm
             dist/*.exe
+            dist/*.zip
 
       - name: 发布 Release
         uses: softprops/action-gh-release@v1
@@ -64,6 +65,7 @@ jobs:
             dist/*.deb
             dist/*.rpm
             dist/*.exe
+            dist/*.zip
             dist/latest.yml
             dist/latest-linux.yml
             dist/latest-mac.yml
