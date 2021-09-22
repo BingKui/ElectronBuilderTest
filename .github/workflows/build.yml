@@ -61,7 +61,7 @@ jobs:
         with:
           name: ${{ matrix.os }}
           path: |
-            dist/*.exe
+            dist/**.exe
             dist/latest.yml
       
       - name: 上传Mac构建产物
@@ -70,7 +70,7 @@ jobs:
         with:
           name: ${{ matrix.os }}
           path: |
-            dist/*.dmg
+            dist/**.dmg
             dist/latest-mac.yml
       
       # - name: 发布 Release
@@ -86,7 +86,9 @@ jobs:
           files: |
             dist/**.dmg
             dist/**.exe
-            dist/**.yml
+            dist/latest.yml
+            dist/latest-linux.yml
+            dist/latest-mac.yml
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       # step7: create release
