@@ -51,9 +51,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: cleanup artifacts
-        run: |
-          npx rimraf "dist/!(*.exe|*.dmg)"
+      # - name: cleanup artifacts
+      #   run: |
+      #     npx rimraf "dist/!(*.exe|*.dmg)"
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v2
