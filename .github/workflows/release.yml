@@ -22,8 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-11.0
-          - ubuntu-18.04
+          - macos-latest
           - windows-latest
     # create steps
     steps:
@@ -51,8 +50,6 @@ jobs:
         with:
           path: |
             dist/*.dmg
-            dist/*.deb
-            dist/*.rpm
             dist/*.exe
             dist/*.zip
 
@@ -62,8 +59,6 @@ jobs:
         with:
           files: |
             dist/*.dmg
-            dist/*.deb
-            dist/*.rpm
             dist/*.exe
             dist/*.zip
             dist/latest.yml
