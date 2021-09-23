@@ -3,6 +3,8 @@ import { Notic, AddShortcuts, AddMenuList, AddDataBase } from './electron';
 import { FUNCTION_KEY, LETTER_KEY } from './constants/shortcuts';
 import DB_NAME from './constants/db';
 const { port, host } = require('../electron/config');
+// 添加更新
+const updater = require('update-electron-app');
 
 if (process.env.NODE_ENV !== 'development') {
     global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
@@ -56,6 +58,12 @@ function createWindow() {
     for (let key in DB_NAME) {
         AddDataBase(DB_NAME[key]);
     }
+    // 更新
+    updater({
+        repo: 'https://github.com/BingKui/ElectronBuilderTest',
+        // updateInterval: ' hour',
+        logger: require('electron-log')
+    });
 }
 
 app.on('ready', createWindow);
