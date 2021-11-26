@@ -24,6 +24,7 @@ jobs:
         os:
           - macos-latest
           - windows-latest
+          - ubuntu-latest
     # create steps
     steps:
       # step1: check out repository
@@ -52,7 +53,10 @@ jobs:
             dist/*.dmg
             dist/*.exe
             dist/*.zip
-
+            dist/*.deb
+            dist/*.rpm
+            dist/*.snap
+            dist/*.AppImage
       - name: 发布 Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
@@ -61,6 +65,10 @@ jobs:
             dist/*.dmg
             dist/*.exe
             dist/*.zip
+            dist/*.deb
+            dist/*.rpm
+            dist/*.snap
+            dist/*.AppImage
             dist/latest.yml
             dist/latest-linux.yml
             dist/latest-mac.yml
